@@ -13,3 +13,75 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Local configuration (SDK path, keystore, etc.)
+local.properties
+
+# Android Studio
+.idea/
+*.iml
+*.hprof
+
+# Kotlin
+*.kotlin_module
+
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+generated/
+captures/
+output.json
+
+# Signing files (si usas un keystore en el proyecto)
+*.jks
+*.keystore
+
+# ProGuard
+proguard/
+proguard-rules.pro
+
+# Gradle Wrapper
+gradle-wrapper.jar
+
+# Android Lint
+lint/intermediate/
+lint/generated/
+
+# Misc
+.DS_Store
+*.log
+*.orig
+*.rej
+
+# JetBrains IDEs (si alguien usa IntelliJ, etc.)
+*.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# Crashlytics
+crashlytics.properties
+
+# NDK
+obj/
+.externalNativeBuild/
+
+# Kotlin/Native
+*.klib
