@@ -1,7 +1,7 @@
 package com.app.vinilos_misw4203.models
 
 data class Album(
-    val albumId: Long = 0,
+    val albumId: Int,
     val name: String,
     val coverUrl: String,
     val releaseDate: String,
