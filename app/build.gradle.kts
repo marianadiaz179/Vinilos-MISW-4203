@@ -40,6 +40,7 @@ android {
     buildFeatures {
         compose = true
         dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -66,6 +67,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation)
+    implementation(libs.volley)
+    implementation(libs.material)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

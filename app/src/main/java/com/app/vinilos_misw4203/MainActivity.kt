@@ -1,47 +1,35 @@
 package com.app.vinilos_misw4203
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.app.vinilos_misw4203.ui.theme.Vinilos_MISW4203Theme
+import android.util.Log
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import android.view.Menu
+import android.view.MenuItem
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.app.vinilos_misw4203.R
+import com.app.vinilos_misw4203.databinding.ActivityMainBinding
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            Vinilos_MISW4203Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        navController = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
+
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        setupActionBarWithNavController(navController)
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Vinilos_MISW4203Theme {
-        Greeting("Android")
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

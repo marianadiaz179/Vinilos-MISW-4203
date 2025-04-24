@@ -1,18 +1,17 @@
 package com.app.vinilos_misw4203.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import com.app.vinilos_misw4203.repositories.AlbumRepository
 import com.app.vinilos_misw4203.models.Album
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
 
-    private val _albums = MutableLiveData<List<Album>?>()
+    private val albumsRepository = AlbumRepository(application)
 
-    val albums: MutableLiveData<List<Album>?>
+    private val _albums = MutableLiveData<List<Album>>()
+
+    val albums: LiveData<List<Album>>
         get() = _albums
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
@@ -30,23 +29,13 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
     }
 
     private fun refreshDataFromNetwork() {
-        NetworkServiceAdapter.getInstance(getApplication()).getAlbums({
-            val it = null
+        albumsRepository.refreshData({
             _albums.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
         },{
             _eventNetworkError.value = true
         })
-    }
-
-    class NetworkServiceAdapter {
-        companion object {
-            fun getInstance(application: Any): Any {
-                TODO("Not yet implemented")
-            }
-        }
-
     }
 
     fun onNetworkErrorShown() {
@@ -62,8 +51,4 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
-}
-
-private fun Any.getAlbums(function: () -> Unit, function1: () -> Unit) {
-    TODO("Not yet implemented")
 }
