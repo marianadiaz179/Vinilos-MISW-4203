@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@id/albumFragment">
+
+    <fragment
+        android:id="@+id/albumFragment"
+        android:name="com.app.vinilos_misw4203.ui.fragments.AlbumFragment"
+        android:label="fragment_album"
+        tools:layout="@layout/fragment_album" >
+        <!-- Definir aquí las acciones o destinos -->
+    </fragment>
+
+</navigation>
