@@ -7,7 +7,6 @@
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.app.vinilos_misw4203.ui.AlbumFragment"
-        android:label="album_fragment"
         tools:layout="@layout/album_fragment" >
     </fragment>
 </navigation>

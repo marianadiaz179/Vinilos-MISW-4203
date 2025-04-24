@@ -14,29 +14,58 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/stroke_color"
-            app:strokeWidth="1dp">
+            app:strokeColor="@color/verde_oscuro_2"
+            app:strokeWidth="1dp"
+            app:cornerRadius="16dp"
+            app:contentPadding="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{album.name}" />
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{album.description}" />
+                <!-- Imagen a la izquierda -->
+                <ImageView
+                    android:id="@+id/album_cover"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/album"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerCrop"/>
 
+                <!-- Texto a la derecha -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+
+                    <!-- Nombre del álbum -->
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{album.name}"
+                        android:textSize="16sp"
+                        android:textColor="@color/negro"
+                        android:textStyle="bold" />
+
+                    <!-- Género del álbum -->
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{album.genre}"
+                        android:textSize="14sp"
+                        android:textColor="@color/gris_oscuro" />
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
