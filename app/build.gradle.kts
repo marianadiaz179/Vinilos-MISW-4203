@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.volley)
     implementation(libs.material)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.glide)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
