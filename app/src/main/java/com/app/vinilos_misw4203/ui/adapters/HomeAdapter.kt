@@ -4,40 +4,40 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import android.os.Bundle
+import android.widget.Toast
 import com.app.vinilos_misw4203.R
 import com.app.vinilos_misw4203.databinding.AlbumItemBinding
 import com.app.vinilos_misw4203.models.Album
 
-class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
+class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    var albums :List<Album> = emptyList()
+    var albums: List<Album> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            AlbumViewHolder.LAYOUT,
+            HomeViewHolder.LAYOUT,
             parent,
-            false)
-        return AlbumViewHolder(withDataBinding)
+            false
+        )
+        return HomeViewHolder(withDataBinding)
     }
 
-    override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.album = albums[position]
-    
+
             it.cardContainer.setOnClickListener {
                 val context = holder.itemView.context
-                android.widget.Toast.makeText(
+                Toast.makeText(
                     context,
                     "Esta funcionalidad aún no está lista",
-                    android.widget.Toast.LENGTH_SHORT
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         }
@@ -47,14 +47,11 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
         return albums.size
     }
 
-
-    class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
+    class HomeViewHolder(val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.album_item
         }
     }
-
-
 }
