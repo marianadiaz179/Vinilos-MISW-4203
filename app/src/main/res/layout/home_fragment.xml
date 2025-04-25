@@ -36,7 +36,7 @@
 
         <!-- Opción 1: Álbumes -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardContainer1"
+            android:id="@+id/albumContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -60,7 +60,7 @@
                     android:id="@+id/album_cover1"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/album"
+                    android:src="@drawable/album_container"
                     android:layout_marginEnd="16dp"
                     android:scaleType="centerCrop"/>
 
@@ -69,6 +69,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center_vertical">
 
@@ -87,7 +88,7 @@
 
         <!-- Opción 2: Artistas -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardContainer2"
+            android:id="@+id/artistContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -111,7 +112,7 @@
                     android:id="@+id/album_cover2"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/album"
+                    android:src="@drawable/artist_container"
                     android:layout_marginEnd="16dp"
                     android:scaleType="centerCrop"/>
 
@@ -128,6 +129,7 @@
                         android:id="@+id/textView62"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:text="Artistas"
                         android:textSize="16sp"
                         android:textColor="@color/negro"
@@ -138,7 +140,7 @@
 
         <!-- Opción 3: Colecciones -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardContainer3"
+            android:id="@+id/collectionContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -162,7 +164,7 @@
                     android:id="@+id/album_cover3"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/album"
+                    android:src="@drawable/collection_container"
                     android:layout_marginEnd="16dp"
                     android:scaleType="centerCrop"/>
 
@@ -179,6 +181,7 @@
                         android:id="@+id/textView63"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:text="Colecciones"
                         android:textSize="16sp"
                         android:textColor="@color/negro"
