@@ -3,10 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/albumFragment">
+    app:startDestination="@id/homeFragment"> <!-- Cambiado a homeFragment -->
+
+    <!-- Definición de HomeFragment como primer fragmento -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.app.vinilos_misw4203.ui.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/home_fragment">
+        <!-- Acción a AlbumFragment -->
+        <action
+            android:id="@+id/action_homeFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+    </fragment>
+
+    <!-- Definición de AlbumFragment como el segundo fragmento -->
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.app.vinilos_misw4203.ui.AlbumFragment"
-        tools:layout="@layout/album_fragment" >
-    </fragment>
+        android:label="Álbumes"
+        tools:layout="@layout/album_fragment" />
 </navigation>
