@@ -6,44 +6,55 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import android.os.Bundle
 import com.app.vinilos_misw4203.R
 import com.app.vinilos_misw4203.databinding.AlbumItemBinding
 import com.app.vinilos_misw4203.models.Album
-import com.app.vinilos_misw4203.ui.fragments.AlbumFragmentDirections
 
-class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
+class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
 
-    var albums: List<Album> = emptyList()
+    var albums :List<Album> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
-        val binding: AlbumItemBinding = DataBindingUtil.inflate(
+        val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             AlbumViewHolder.LAYOUT,
             parent,
-            false
-        )
-        return AlbumViewHolder(binding)
+            false)
+        return AlbumViewHolder(withDataBinding)
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        holder.binding.album = albums[position]
-        holder.binding.root.setOnClickListener {
-            val action =
-                AlbumFragmentDirections
-                    .actionAlbumFragment2ToCommentsFragment2(albums[position].albumId)
-            it.findNavController().navigate(action)
+        holder.viewDataBinding.also {
+            it.album = albums[position]
+    
+            it.cardContainer.setOnClickListener {
+                val context = holder.itemView.context
+                android.widget.Toast.makeText(
+                    context,
+                    "Esta funcionalidad aún no está lista",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
-    override fun getItemCount() = albums.size
+    override fun getItemCount(): Int {
+        return albums.size
+    }
 
-    class AlbumViewHolder(val binding: AlbumItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
+        RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
-            @LayoutRes val LAYOUT = R.layout.album_item
+            @LayoutRes
+            val LAYOUT = R.layout.album_item
         }
     }
+
+
 }
