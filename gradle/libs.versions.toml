@@ -14,6 +14,7 @@ constraintlayout = "2.1.4"
 volley = "1.2.1"
 material = "1.11.0"
 navigationUiKtx = "2.8.9"
+espressoContrib = "3.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +47,7 @@ material = { group = "com.google.android.material", name = "material", version =
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version = "4.12.0" }
 glideCompiler = { group = "com.github.bumptech.glide", name = "compiler", version = "4.12.0" }
+androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

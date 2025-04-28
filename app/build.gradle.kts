@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.glide)
+    implementation(libs.androidx.espresso.contrib)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
