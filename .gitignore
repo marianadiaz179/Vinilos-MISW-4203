@@ -31,7 +31,6 @@ local.properties
 *.kotlin_module
 
 # Built application files
-*.apk
 *.ap_
 *.aab
 
