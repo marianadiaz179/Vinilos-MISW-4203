@@ -2,11 +2,15 @@
 
 Este proyecto es una aplicación móvil desarrollada en **Kotlin**, siguiendo el patrón de arquitectura **MVVM** y utilizando un **Repository Pattern** y **Service Adapter** para la gestión de datos y conexión con la API. La aplicación hasta este punto visualizar un catálogo de álbumes de manera fluida y moderna.
 
+
+---
 # !! Aviso Importante
 
 Al momento de esta entrega, la URL del backend, que originalmente estaba expuesta públicamente (https://backvynils-q6yc.onrender.com/albums), no está funcionando correctamente. El APK, que se encuentra en la carpeta `app/releases/vinilos.apk`, se generó manteniendo la URL de acceso público para garantizar que, en caso de que se solucione el problema, el APK funcione y se conecte correctamente al API en un dispositivo físico.
 
 Sin embargo, en el código principal del repositorio, la URL que conecta al backend se ha actualizado a `10.0.2.2:3000` para facilitar las pruebas locales.(ya que esta es la IP que se expone en un simulador de Android). Para que la aplicación funcione correctamente de manera local, debes asegurarte de seguir los pasos de la sección del **README** para levantar el backend localmente, ya que esta es la URL que el código utilizará durante el desarrollo.
+
+
 
 ## Requisitos Previos
 
@@ -90,7 +94,16 @@ git clone <https://github.com/marianadiaz179/Vinilos-MISW-4203.git>
 
 - Android Studio detectará automáticamente el proyecto como un proyecto de Android.
 
-### 3. Sincroniza el proyectp
+---
+### !!! Aviso importante
+
+Asegurese que en el archivo oculto `local.properties` esté definido correctamente el path al sdk de Android
+
+Ejemplo: `sdk.dir=/Users/<your_user>/Library/Android/sdk`
+
+---
+
+### 3. Sincroniza el proyecto
 
 - Asegúrate de que Gradle sincronice correctamente.
 
@@ -111,10 +124,18 @@ git clone <https://github.com/marianadiaz179/Vinilos-MISW-4203.git>
 - Si encuentras errores de dependencias, puedes limpiar y reconstruir el proyecto:
 
 
-
 ```bash
 ./gradlew clean build
 ```
+
+## Pruebas Espresso
+
+Para esta entrega se ha definido que el alcance cubriría únicamente HU001, para ello se hicieron pruebas E2E en Espresso, el archivo se puede encontrar en `Vinilos-MISW-4203/app/src/androidTest/java/com/app/vinilos_misw4203/AlbumFragmentTest.kt`
+
+Para correr las pruebas desde Android Studio desde el directorio haga click derecho sobre el archivo y busque la opción que permita ejecutar estas pruebas, al finalizar la ejecución se podrá ver en la parte inferior de la terminal los resultados.
+
+Para evidencias de este sprint, se pueden encontrar los resultados de las pruebas en el siguiente link de la wiki:
+https://github.com/marianadiaz179/Vinilos-MISW-4203/wiki/Sprint-1#resultados-de-pruebas-e2e-espresso
 
 
 
