@@ -48,25 +48,40 @@ class AlbumFragment : Fragment() {
             "You can only access the viewModel after onActivityCreated()"
         }
         activity.actionBar?.title = getString(R.string.title_albums)
-        viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application)).get(AlbumViewModel::class.java)
+
+        viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application))
+            .get(AlbumViewModel::class.java)
+
+        // Mostrar el loader al iniciar
+        showLoading(true)
+
         viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
             it.apply {
                 viewModelAdapter!!.albums = this
+                showLoading(false) // Ocultar loader al recibir datos
             }
         })
+
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
     private fun onNetworkError() {
-        if(!viewModel.isNetworkErrorShown.value!!) {
+        if (!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
+            showLoading(false) // Ocultar loader si hay error
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.albumsRv.visibility = if (isLoading) View.GONE else View.VISIBLE
     }
 }

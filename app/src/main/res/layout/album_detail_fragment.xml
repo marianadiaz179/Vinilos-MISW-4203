@@ -1,41 +1,87 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data />
-    <ScrollView
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+
+        <!-- Contenido principal dentro de ScrollView -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="match_parent"
+            android:padding="24dp">
 
-            <ImageView
-                android:id="@+id/albumImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@android:drawable/ic_menu_gallery" />
-
-            <TextView
-                android:id="@+id/albumName"
+            <LinearLayout
+                android:id="@+id/albumDetailFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-            <TextView
-                android:id="@+id/albumDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <!-- Imagen del álbum -->
+                <ImageView
+                    android:id="@+id/albumImage"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:layout_marginBottom="26dp" />
 
-            <TextView
-                android:id="@+id/albumGenre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <!-- Título debajo de la imagen -->
+                <TextView
+                    android:id="@+id/albumName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="26dp" />
 
-            <TextView
-                android:id="@+id/albumReleaseDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </ScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="center_vertical"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/albumReleaseDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="textStart"
+                        android:textColor="#666666" />
+
+                    <TextView
+                        android:id="@+id/albumGenre"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="italic"
+                        android:textColor="#666666"
+                        android:textAlignment="textEnd"
+                        android:paddingEnd="15dp" />  
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/albumDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="12dp"
+                    android:textColor="#444444" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- ProgressBar centrada mientras se cargan los datos -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
 </layout>
