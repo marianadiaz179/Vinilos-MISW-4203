@@ -12,6 +12,9 @@ import com.android.volley.toolbox.Volley
 import com.app.vinilos_misw4203.models.Album
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.coroutines.suspendCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
@@ -28,29 +31,23 @@ class NetworkServiceAdapter constructor(context: Context) {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
     }
-    fun getAlbums(onComplete:(resp:List<Album>)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getAlbums()= suspendCoroutine<List<Album>>{ cont ->
         requestQueue.add(getRequest("albums",
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-                    list.add(i, Album(albumId = item.getInt("id"),
-                                        name = item.getString("name"), 
-                                        coverUrl = item.getString("cover"), 
-                                        recordLabel = item.getString("recordLabel"), 
-                                        releaseDate = item.getString("releaseDate"), 
-                                        genre = item.getString("genre"), 
-                                        description = item.getString("description")))
+                    list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), coverUrl = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
                 }
-                onComplete(list)
+                cont.resume(list)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
 
-    fun getAlbum(id: Int, onComplete:(resp:Album)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getAlbum(id: Int) = suspendCoroutine<Album> { cont ->
         requestQueue.add(getRequest("albums/$id",
             Response.Listener<String> { response ->
                 val item = JSONObject(response)
@@ -61,10 +58,10 @@ class NetworkServiceAdapter constructor(context: Context) {
                     releaseDate = item.getString("releaseDate"),
                     genre = item.getString("genre"),
                     description = item.getString("description"))
-                onComplete(album)
+                cont.resume(album)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
     
