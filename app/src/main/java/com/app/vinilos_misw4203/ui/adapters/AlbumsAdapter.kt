@@ -6,14 +6,14 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import android.os.Bundle
 import com.app.vinilos_misw4203.R
 import com.app.vinilos_misw4203.databinding.AlbumItemBinding
 import com.app.vinilos_misw4203.models.Album
+import com.app.vinilos_misw4203.ui.AlbumFragmentDirections // Importante
 
-class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
+class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
-    var albums :List<Album> = emptyList()
+    var albums: List<Album> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -24,29 +24,25 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
             LayoutInflater.from(parent.context),
             AlbumViewHolder.LAYOUT,
             parent,
-            false)
+            false
+        )
         return AlbumViewHolder(withDataBinding)
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
+        val album = albums[position]
         holder.viewDataBinding.also {
-            it.album = albums[position]
-    
-            it.cardContainer.setOnClickListener {
-                val context = holder.itemView.context
-                android.widget.Toast.makeText(
-                    context,
-                    "Esta funcionalidad aún no está lista",
-                    android.widget.Toast.LENGTH_SHORT
-                ).show()
+            it.album = album
+
+            it.cardContainer.setOnClickListener { view ->
+                val action = AlbumFragmentDirections
+                    .actionAlbumFragmentToAlbumDetailFragment(album.albumId)
+                view.findNavController().navigate(action)
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return albums.size
-    }
-
+    override fun getItemCount(): Int = albums.size
 
     class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
@@ -55,6 +51,4 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
             val LAYOUT = R.layout.album_item
         }
     }
-
-
 }

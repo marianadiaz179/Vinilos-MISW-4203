@@ -22,5 +22,21 @@
         android:id="@+id/albumFragment"
         android:name="com.app.vinilos_misw4203.ui.AlbumFragment"
         android:label="Álbumes"
-        tools:layout="@layout/album_fragment" />
+        tools:layout="@layout/album_fragment">
+        
+        <action
+            android:id="@+id/action_albumFragment_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumDetailFragment"
+        android:name="com.app.vinilos_misw4203.ui.AlbumDetailFragment"
+        android:label="Detalle del Álbum"
+        tools:layout="@layout/fragment_album_detail">
+
+        <argument
+            android:name="albumId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
