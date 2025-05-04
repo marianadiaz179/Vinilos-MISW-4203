@@ -63,7 +63,7 @@ class AlbumDetailFragment : Fragment() {
         binding.albumGenre.text = album.genre
         binding.albumReleaseDate.text = album.releaseDate.substring(0,4)
         binding.albumDescription.text = album.description
-        binding.albumImage.setImageResource(R.drawable.album)
+        binding.albumImage.setImageResource(R.drawable.album_detail)
         (requireActivity() as AppCompatActivity).supportActionBar?.title = album.name
 
     }
