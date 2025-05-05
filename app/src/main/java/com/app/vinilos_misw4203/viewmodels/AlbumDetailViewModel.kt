@@ -3,17 +3,25 @@ package com.app.vinilos_misw4203.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.app.vinilos_misw4203.models.Album
+import com.app.vinilos_misw4203.models.Comment
 import com.app.vinilos_misw4203.repositories.AlbumDetailRepository
+import com.app.vinilos_misw4203.repositories.CommentsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 class AlbumDetailViewModel(application: Application) : AndroidViewModel(application) {
 
     private val albumDetailRepository = AlbumDetailRepository(application)
+    private val commentsRepository = CommentsRepository(application)
 
     private val _album = MutableLiveData<Album>()
     val album: LiveData<Album>
         get() = _album
+
+    private val _comments = MutableLiveData<List<Comment>>()
+    val comments: LiveData<List<Comment>>
+        get() = _comments
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
@@ -25,16 +33,18 @@ class AlbumDetailViewModel(application: Application) : AndroidViewModel(applicat
 
     fun refreshAlbumDetail(id: Int) {
         try {
-            viewModelScope.launch (Dispatchers.Default){
-                withContext(Dispatchers.IO){
-                    var data = albumDetailRepository.refreshData(id)
-                    _album.postValue(data)
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    val albumData = albumDetailRepository.refreshData(id)
+                    val commentsData = commentsRepository.refreshData(id)
+
+                    _album.postValue(albumData)
+                    _comments.postValue(commentsData)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
             _eventNetworkError.value = true
         }
     }
