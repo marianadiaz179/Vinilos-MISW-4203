@@ -10,12 +10,16 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.app.vinilos_misw4203.models.Album
+import com.app.vinilos_misw4203.models.Comment
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.coroutines.suspendCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
-        const val BASE_URL= "http://10.0.2.2:3000/"
+        const val BASE_URL= "https://backvynils-q6yc.onrender.com/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -28,25 +32,55 @@ class NetworkServiceAdapter constructor(context: Context) {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
     }
-    fun getAlbums(onComplete:(resp:List<Album>)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getAlbums()= suspendCoroutine<List<Album>>{ cont ->
         requestQueue.add(getRequest("albums",
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-                    list.add(i, Album(albumId = item.getInt("id"),
-                                        name = item.getString("name"), 
-                                        coverUrl = item.getString("cover"), 
-                                        recordLabel = item.getString("recordLabel"), 
-                                        releaseDate = item.getString("releaseDate"), 
-                                        genre = item.getString("genre"), 
-                                        description = item.getString("description")))
+                    list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), coverUrl = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
                 }
-                onComplete(list)
+                cont.resume(list)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
+            }))
+    }
+
+    suspend fun getAlbum(id: Int) = suspendCoroutine<Album> { cont ->
+        requestQueue.add(getRequest("albums/$id",
+            Response.Listener<String> { response ->
+                val item = JSONObject(response)
+                val album = Album(albumId = item.getInt("id"),
+                    name = item.getString("name"),
+                    coverUrl = item.getString("cover"),
+                    recordLabel = item.getString("recordLabel"),
+                    releaseDate = item.getString("releaseDate"),
+                    genre = item.getString("genre"),
+                    description = item.getString("description"))
+                cont.resume(album)
+            },
+            Response.ErrorListener {
+                cont.resumeWithException(it)
+            }))
+    }
+
+    suspend fun getComments(albumId:Int) = suspendCoroutine<List<Comment>>{ cont->
+        requestQueue.add(getRequest("albums/$albumId/comments",
+            Response.Listener<String> { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Comment>()
+                var item:JSONObject? = null
+                for (i in 0 until resp.length()) {
+                    item = resp.getJSONObject(i)
+                    Log.d("Response", item.toString())
+                    list.add(i, Comment(albumId = albumId, rating = item.getInt("rating").toString(), description = item.getString("description")))
+                }
+                cont.resume(list)
+            },
+            Response.ErrorListener {
+                cont.resumeWithException(it)
             }))
     }
     
