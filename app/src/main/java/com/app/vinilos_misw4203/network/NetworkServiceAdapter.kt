@@ -10,6 +10,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.app.vinilos_misw4203.models.Album
+import com.app.vinilos_misw4203.models.Comment
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.suspendCoroutine
@@ -59,6 +60,24 @@ class NetworkServiceAdapter constructor(context: Context) {
                     genre = item.getString("genre"),
                     description = item.getString("description"))
                 cont.resume(album)
+            },
+            Response.ErrorListener {
+                cont.resumeWithException(it)
+            }))
+    }
+
+    suspend fun getComments(albumId:Int) = suspendCoroutine<List<Comment>>{ cont->
+        requestQueue.add(getRequest("albums/$albumId/comments",
+            Response.Listener<String> { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Comment>()
+                var item:JSONObject? = null
+                for (i in 0 until resp.length()) {
+                    item = resp.getJSONObject(i)
+                    Log.d("Response", item.toString())
+                    list.add(i, Comment(albumId = albumId, rating = item.getInt("rating").toString(), description = item.getString("description")))
+                }
+                cont.resume(list)
             },
             Response.ErrorListener {
                 cont.resumeWithException(it)
