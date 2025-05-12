@@ -33,7 +33,7 @@
         android:id="@+id/albumDetailFragment"
         android:name="com.app.vinilos_misw4203.ui.AlbumDetailFragment"
         android:label="Detalle del Álbum"
-        tools:layout="@layout/fragment_album_detail">
+        tools:layout="@layout/album_detail_fragment">
 
         <argument
             android:name="albumId"
