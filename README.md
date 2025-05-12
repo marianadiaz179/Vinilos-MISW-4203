@@ -6,10 +6,11 @@ Este proyecto es una aplicación móvil desarrollada en **Kotlin**, siguiendo el
 ---
 # !! Aviso Importante
 
-Al momento de esta entrega, la URL del backend, que originalmente estaba expuesta públicamente (https://backvynils-q6yc.onrender.com/albums), no está funcionando correctamente. El APK, que se encuentra en la carpeta `app/releases/vinilos.apk`, se generó manteniendo la URL de acceso público para garantizar que, en caso de que se solucione el problema, el APK funcione y se conecte correctamente al API en un dispositivo físico.
+El APK de esta entrega se encuentra en `app/releases/vinilos-sprint-2.apk`, se ha mantenido el apk de la entrega anterior en caso de ser necesario y se encuentra en la misma carpeta `app/releases/vinilos-sprint-1.apk`
 
-Sin embargo, en el código principal del repositorio, la URL que conecta al backend se ha actualizado a `10.0.2.2:3000` para facilitar las pruebas locales.(ya que esta es la IP que se expone en un simulador de Android). Para que la aplicación funcione correctamente de manera local, debes asegurarte de seguir los pasos de la sección del **README** para levantar el backend localmente, ya que esta es la URL que el código utilizará durante el desarrollo.
+Al momento de esta entrega, la URL del backend, que estáa expuesta públicamente (https://backvynils-q6yc.onrender.com/albums), está funcionando correctamente. El APK, que se encuentra en la carpeta `app/releases/vinilos-sprint-2.apk`, se generó manteniendo la URL de acceso público para garantizar que el APK funcione y se conecte correctamente al API en un dispositivo físico.
 
+Sin embargo, en el código principal del repositorio, la URL que conecta al backend se ha actualizado a `http://10.0.2.2:3000/` para facilitar las pruebas locales.(ya que esta es la IP que se expone en un simulador de Android). Para que la aplicación funcione correctamente de manera local, debes asegurarte de seguir los pasos de la sección del **README** para levantar el backend localmente, ya que esta es la URL que el código utilizará durante el desarrollo.
 
 
 ## Requisitos Previos
@@ -128,18 +129,33 @@ Ejemplo: `sdk.dir=/Users/<your_user>/Library/Android/sdk`
 ./gradlew clean build
 ```
 
-## Pruebas Espresso
+## Resultados de Preubas
 
-Para esta entrega se ha definido que el alcance cubriría únicamente HU001, para ello se hicieron pruebas E2E en Espresso, el archivo se puede encontrar en `Vinilos-MISW-4203/app/src/androidTest/java/com/app/vinilos_misw4203/AlbumFragmentTest.kt`
+Para esta entrega se ha definido que el alcance agregaría la historia de usuario HU002, para ello se hicieron pruebas E2E en Espresso, el archivo se puede encontrar en `Vinilos-MISW-4203/app/src/androidTest/java/com/app/vinilos_misw4203/AlbumDetailFragmentTest.kt`
 
 Para correr las pruebas desde Android Studio desde el directorio haga click derecho sobre el archivo y busque la opción que permita ejecutar estas pruebas, al finalizar la ejecución se podrá ver en la parte inferior de la terminal los resultados.
 
 Para evidencias de este sprint, se pueden encontrar los resultados de las pruebas en el siguiente link de la wiki:
-https://github.com/marianadiaz179/Vinilos-MISW-4203/wiki/Sprint-1#resultados-de-pruebas-e2e-espresso
+https://github.com/marianadiaz179/Vinilos-MISW-4203/wiki/Sprint-2#resultados-de-pruebas-e2e-espresso
+
+Para esta entrega se ha agregado un Code Inspection para identificar oportunidades de mejora en el código y a partir de ello
+se han realizado micro optimizaciones y buenas prácticas para el consumo de memoria y el manejo de ANRs, la documentación
+se puede encontrar en los siguientes links de la wiki:
+
+https://github.com/marianadiaz179/Vinilos-MISW-4203/wiki/Sprint-2#code-inspection
+
+https://github.com/marianadiaz179/Vinilos-MISW-4203/wiki/Sprint-2#micro-optimizaciones
+
+https://github.com/marianadiaz179/Vinilos-MISW-4203/wiki/Sprint-2#buenas-pr%C3%A1cticas-para-el-consumo-de-memoria
+
+https://github.com/marianadiaz179/Vinilos-MISW-4203/wiki/Sprint-2#buenas-pr%C3%A1cticas-para-anrs
+
+Finalmente se hizo un profiler en Android Studio para ejeuctar correctamente las pruebas de desempeño:
+
+https://github.com/marianadiaz179/Vinilos-MISW-4203/wiki/Sprint-2#profiler
 
 
 
 ## Autores
 
 - Mariana Diaz - m.diaza2@uniandes.edu.co
-- Diego Acosta - d.acostao@uniandes.edu.co
