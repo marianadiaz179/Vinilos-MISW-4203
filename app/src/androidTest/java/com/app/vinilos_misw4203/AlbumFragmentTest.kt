@@ -26,6 +26,7 @@ class AlbumFragmentTest {
         onView(allOf(withText("Álbumes"), isDescendantOfA(withId(R.id.albumFragment))))
             .check(matches(isDisplayed()))
 
+        Thread.sleep(4000)
         onView(withId(R.id.albumsRv)).check(matches(isCompletelyDisplayed()))
         onView(withId(R.id.progressBar)).check(matches(withEffectiveVisibility(Visibility.GONE)))
 
@@ -35,7 +36,7 @@ class AlbumFragmentTest {
     @Test
     fun testAlbumFragmentRecyclerViewItemClick() {
         onView(withId(R.id.albumContainer)).perform(click())
-
+        Thread.sleep(4000)
         onView(withId(R.id.albumsRv))
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
 
@@ -51,7 +52,7 @@ class AlbumFragmentTest {
     @Test
     fun testRecyclerViewVisibilityInAlbumFragment() {
         onView(withId(R.id.albumContainer)).perform(click())
-
+        Thread.sleep(4000)
         onView(withId(R.id.albumsRv)).check(matches(isDisplayed()))
     }
 }
