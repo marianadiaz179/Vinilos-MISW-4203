@@ -2,21 +2,27 @@ package com.app.vinilos_misw4203.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import android.widget.Toast
 import com.app.vinilos_misw4203.R
 import com.app.vinilos_misw4203.databinding.AlbumItemBinding
 import com.app.vinilos_misw4203.models.Album
+import com.app.vinilos_misw4203.models.AlbumDiffCallback
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    var albums: List<Album> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    private var albums: List<Album> = emptyList()
+
+    fun updateAlbums(newAlbums: List<Album>) {
+        val diffCallback = AlbumDiffCallback(albums, newAlbums)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        albums = newAlbums
+        diffResult.dispatchUpdatesTo(this)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(
@@ -29,8 +35,9 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+        val album = albums[position]
         holder.viewDataBinding.also {
-            it.album = albums[position]
+            it.album = album
 
             it.cardContainer.setOnClickListener {
                 val context = holder.itemView.context
@@ -43,9 +50,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int {
-        return albums.size
-    }
+    override fun getItemCount(): Int = albums.size
 
     class HomeViewHolder(val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
