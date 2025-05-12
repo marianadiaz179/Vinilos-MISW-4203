@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vinilos_misw4203.R
 import com.app.vinilos_misw4203.models.Comment
+import com.app.vinilos_misw4203.models.CommentDiffCallback
 
 class CommentsAdapter(private var comments: List<Comment>) :
     RecyclerView.Adapter<CommentsAdapter.CommentViewHolder>() {
@@ -31,7 +33,10 @@ class CommentsAdapter(private var comments: List<Comment>) :
     override fun getItemCount() = comments.size
 
     fun updateComments(newComments: List<Comment>) {
+        val diffCallback = CommentDiffCallback(comments, newComments)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         comments = newComments
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 }
