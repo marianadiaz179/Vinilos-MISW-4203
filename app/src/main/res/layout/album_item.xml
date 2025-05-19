@@ -39,6 +39,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/album"
+                    android:contentDescription="Imagen de @{album.name} como icono"
                     android:layout_marginEnd="16dp"
                     android:scaleType="centerCrop"/>
 
@@ -56,6 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{album.name}"
+                        android:contentDescription="@{album.name}"
                         android:textSize="16sp"
                         android:textColor="@color/negro"
                         android:textStyle="bold" />
@@ -66,6 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{album.genre}"
+                        android:contentDescription="@{album.genre}"
                         android:textSize="14sp"
                         android:textColor="@color/gris_oscuro" />
                 </LinearLayout>

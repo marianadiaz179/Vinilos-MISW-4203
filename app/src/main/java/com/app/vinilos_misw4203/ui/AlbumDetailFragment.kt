@@ -75,6 +75,7 @@ class AlbumDetailFragment : Fragment() {
 
     private fun updateUI(album: Album) {
         binding.albumName.text = album.name
+        binding.albumName.contentDescription = "Detalle de " + album.name
         binding.albumGenre.text = album.genre
         binding.albumReleaseDate.text = album.releaseDate.substring(0, 4)
         binding.albumDescription.text = album.description

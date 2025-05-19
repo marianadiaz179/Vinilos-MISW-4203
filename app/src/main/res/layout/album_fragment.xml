@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Álbumes"
+            android:contentDescription="Listado de álbumes para visualizar todos los disponibles"
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="@color/negro"/>
@@ -47,6 +48,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:src="@drawable/album"
+                android:contentDescription="Icono de álbumes"
                 app:tint="@android:color/white"/>
         </FrameLayout>
     </LinearLayout>
