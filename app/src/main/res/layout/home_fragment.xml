@@ -78,6 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Álbumes"
+                        android:contentDescription="Botón para ver todos los álbumes"
                         android:textSize="16sp"
                         android:textColor="@color/negro"
                         android:textStyle="bold" />

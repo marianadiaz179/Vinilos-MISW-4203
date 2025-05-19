@@ -19,5 +19,5 @@
         android:layout_height="wrap_content"
         android:text="Rating"
         android:textSize="14sp"
-        android:textColor="#777"/>
+        android:textColor="#666666" />
 </LinearLayout>
