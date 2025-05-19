@@ -60,6 +60,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/album_container"
+                    android:contentDescription="Imagen de portada del álbum"
                     android:layout_marginEnd="16dp"
                     android:scaleType="centerCrop"/>
 
@@ -113,6 +114,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/artist_container"
+                    android:contentDescription="Imagen de portada del artista"
                     android:layout_marginEnd="16dp"
                     android:scaleType="centerCrop"/>
 
@@ -165,6 +167,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/collection_container"
+                    android:contentDescription="Imagen de portada de la colección"
                     android:layout_marginEnd="16dp"
                     android:scaleType="centerCrop"/>
 
