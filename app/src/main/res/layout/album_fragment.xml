@@ -48,6 +48,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:src="@drawable/album"
+                android:contentDescription="Icono de álbumes"
                 app:tint="@android:color/white"/>
         </FrameLayout>
     </LinearLayout>

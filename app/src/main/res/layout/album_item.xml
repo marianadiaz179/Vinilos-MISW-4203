@@ -39,6 +39,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/album"
+                    android:contentDescription="Imagen de @{album.name} como icono"
                     android:layout_marginEnd="16dp"
                     android:scaleType="centerCrop"/>
 
